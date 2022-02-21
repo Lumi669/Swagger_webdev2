@@ -14,18 +14,17 @@ servers:
 schemes:
   - "http"
   - "https"
+
+
+#/buildings
 paths:
   /buildings:
     description: Bulding info
+
+    #GET
     get:
+      summary: Returns all buildings
       description: Operation to fetch buildings
-      parameters:
-        - in: query
-          name: buildingname
-          required: true
-          schema: 
-            type: string
-            example: aaaaaa
       responses:
         200:
           description: Sucess Response
@@ -48,8 +47,124 @@ paths:
                           type: string
                         PostNumber:
                           type: integer
-                    
-        
-  
+        400:
+          description: Error
+        500:
+          description: Internal Server Error
 
-  
+    #POST
+    post:
+        summary: Add a new building
+        description: Add a new building
+        parameters:
+          
+          - in: query
+            name: building object
+            required: true
+            schema: 
+              type: object
+              example: 
+        responses:
+          201:
+            description: Sucess Added
+
+#/buildings/buildingID
+  /buildings/buildingID:
+    description: One building
+
+    #GET
+    get:
+      summary: Return one building
+      description: Operation to fetch a building with its buildingID
+      parameters:
+        - in: query
+          name: buildingID
+          required: true
+          schema:
+            type: integer
+            example: 5
+      responses:
+        200:
+          description: Sucess Response
+          content: 
+            application/json:
+              schema:
+                type: object
+                example: {
+                    id: 3,
+                    name: aa,
+                    address:{StreetAddress: apple, PostNumber: 566}
+                  }
+    #PATCH
+    patch:
+      summary: Update one building
+      description: Update one building
+      parameters:
+        - in: query
+          name: buildingID
+          required: true
+          schema:
+            type: integer
+            example: 5
+      responses:
+        204:
+          description: Sucess updated
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {
+                  id: 6,
+                  name: Rakannus 8,
+                  address: {Street address: apple, PostNumber: 356}
+                }
+        
+
+
+#Sensor
+  /buldings/buildingID/sensors:
+      description: all sensors of a specific building
+      get:
+        summary: Returns all sensor of a building
+        description: Operation to fetch all sensors of one building
+        parameters:
+          - in: query
+            name: buildingID
+            required: true
+            schema: 
+              type: integer
+              example: 3
+        responses:
+          200:
+            description: Sucess Response
+            content: 
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    properties:
+                      buildingId: 
+                        type: integer
+                        example: 3
+                      buildingName: 
+                        type: string
+                        example: ROSE
+                      buildingAddress:
+                        type: object
+                        properties:
+                          streetAdress: 
+                            type: string
+                          PostNumber:
+                            type: integer
+          400:
+            description: Error
+          500:
+            description: Internal Server Error
+      
+
+
+
+          
+    
+
+    
