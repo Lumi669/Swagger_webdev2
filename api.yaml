@@ -72,35 +72,30 @@ paths:
 
 #/buildings/buildingID
   /buildings/2:
-    description: One building info
+    #description: One building info
 
     #GET
     get:
       summary: Return one building
+      description: Returning a object
       responses:
         200:
           description: Sucess Response
-          content: 
-            application/json:
-              schema:
+          schema:
+            type: object
+            properties: 
+              id:
+                type: integer
+              name:
+                type: string
+              address:
                 type: object
                 properties:
-                  id:
-                    type: integer
-                  name:
+                  streetAdress: 
                     type: string
-                  address:
-                    type: object
-                    properties:
-                      address:
-                        type: string
-                      PostNumber:
-                        type: integer
-                # example: {
-                #     id: 3,
-                #     name: aa,
-                #     address:{StreetAddress: apple, PostNumber: 566}
-                  # }
+                  PostNumber:
+                    type: integer
+              
         401:
           description: authorization error
 
