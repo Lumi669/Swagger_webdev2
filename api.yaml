@@ -24,7 +24,6 @@ paths:
     #GET
     get:
       summary: Returns all buildings
-      description: Operation to fetch buildings
       responses:
         200:
           description: Sucess Response
@@ -47,15 +46,15 @@ paths:
                           type: string
                         PostNumber:
                           type: integer
+        401:
+          description: authorization error
         400:
-          description: Error
-        500:
-          description: Internal Server Error
+          description: hi, this is a bad request
+        
 
     #POST
     post:
         summary: Add a new building
-        description: Add a new building
         parameters:
           
           - in: query
@@ -67,22 +66,17 @@ paths:
         responses:
           201:
             description: Sucess Added
+          401:
+            description: authorization error
+
 
 #/buildings/buildingID
-  /buildings/buildingID:
-    description: One building
+  /buildings/2:
+    description: One building info
 
     #GET
     get:
       summary: Return one building
-      description: Operation to fetch a building with its buildingID
-      parameters:
-        - in: query
-          name: buildingID
-          required: true
-          schema:
-            type: integer
-            example: 5
       responses:
         200:
           description: Sucess Response
@@ -90,15 +84,29 @@ paths:
             application/json:
               schema:
                 type: object
-                example: {
-                    id: 3,
-                    name: aa,
-                    address:{StreetAddress: apple, PostNumber: 566}
-                  }
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  address:
+                    type: object
+                    properties:
+                      address:
+                        type: string
+                      PostNumber:
+                        type: integer
+                # example: {
+                #     id: 3,
+                #     name: aa,
+                #     address:{StreetAddress: apple, PostNumber: 566}
+                  # }
+        401:
+          description: authorization error
+
     #PATCH
     patch:
       summary: Update one building
-      description: Update one building
       parameters:
         - in: query
           name: buildingID
@@ -118,6 +126,8 @@ paths:
                   name: Rakannus 8,
                   address: {Street address: apple, PostNumber: 356}
                 }
+        401:
+          description: authorization error
         
 
 
@@ -126,7 +136,6 @@ paths:
       description: all sensors of a specific building
       get:
         summary: Returns all sensor of a building
-        description: Operation to fetch all sensors of one building
         parameters:
           - in: query
             name: buildingID
@@ -156,10 +165,9 @@ paths:
                             type: string
                           PostNumber:
                             type: integer
-          400:
-            description: Error
-          500:
-            description: Internal Server Error
+          401:
+            description: authorization error
+          
       
 
 
