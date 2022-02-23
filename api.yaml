@@ -27,25 +27,24 @@ paths:
       responses:
         200:
           description: Sucess Response
-          content: 
-            application/json:
-              schema:
-                type: array
-                items:
+          # content: 
+          #   application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id: 
+                  type: integer
+                name: 
+                  type: string
+                address:
+                  type: object
                   properties:
-                    buildingId: 
-                      type: integer
-                      example: 3
-                    buildingName: 
+                    streetAdress: 
                       type: string
-                      example: ROSE
-                    buildingAddress:
-                      type: object
-                      properties:
-                        streetAdress: 
-                          type: string
-                        PostNumber:
-                          type: integer
+                    PostNumber:
+                      type: integer
         401:
           description: authorization error
         400:
@@ -72,7 +71,7 @@ paths:
 
 #/buildings/buildingID
   /buildings/2:
-    #description: One building info
+    description: One building info
 
     #GET
     get:
