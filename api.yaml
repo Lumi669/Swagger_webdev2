@@ -27,8 +27,7 @@ paths:
       responses:
         200:
           description: Sucess Response
-          # content: 
-          #   application/json:
+          content: application/json
           schema:
             type: array
             items:
@@ -44,39 +43,60 @@ paths:
                     streetAdress: 
                       type: string
                     PostNumber:
-                      type: integer
+                      type: number
         401:
           description: authorization error
         400:
           description: hi, this is a bad request
         
 
-    #POST
+    #POST json/body, note here NOT write '/buildings' again, because above already provided
     post:
         summary: Add a new building
+        produces:
+          - application/json
+        consumes:
+          - application/json
         parameters:
-          
-          - in: query
-            name: building object
-            required: true
-            schema: 
-              type: object
-              example: 
+        - in: body
+          name: building
+          required: true
+          schema: 
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              address:
+                type: object
+                properties: 
+                  streetAdress:
+                    type: string
+                  PostNumber:
+                    type: number
+
         responses:
           201:
-            description: Sucess Added
+            description: created
           401:
             description: authorization error
 
 
-#/buildings/buildingID
-  /buildings/2:
+#/buildings/buildingID, dynamically meaning id is a parameter
+  /buildings/{buildingId}:
     description: One building info
 
     #GET
     get:
       summary: Return one building
       description: Returning a object
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema:
+            type: integer
       responses:
         200:
           description: Sucess Response
@@ -97,6 +117,8 @@ paths:
               
         401:
           description: authorization error
+        404:
+          description: Not found the building
 
     #PATCH
     patch:
