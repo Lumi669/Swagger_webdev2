@@ -123,28 +123,30 @@ paths:
     #PATCH
     patch:
       summary: Update one building
+      produces:
+          - application/json
+      consumes:
+          - application/json
       parameters:
-        - in: query
-          name: buildingID
+        - name: buildingId
+          in: path
           required: true
+          type: integer
+        - name: building name
+          in: body
           schema:
-            type: integer
-            example: 5
+            type: object
+            properties: 
+              buildingName: 
+                type: string
+
+          required: true
       responses:
         204:
           description: Sucess updated
-          content:
-            application/json:
-              schema:
-                type: object
-                example: {
-                  id: 6,
-                  name: Rakannus 8,
-                  address: {Street address: apple, PostNumber: 356}
-                }
+          
         401:
           description: authorization error
-        
 
 
 #Sensor
