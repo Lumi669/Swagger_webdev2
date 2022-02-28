@@ -112,6 +112,14 @@ app.get('/buildings/:id/sensors', (request, response) => {
     response.status(200).send(sensors);
 });
 
+app.get('/sensors/:state', (request, response) => {
+    console.log(request.params);
+
+    const stateSensors = sensors.filter(item => item.state === request.params.state);
+    console.log("statesensors = ", stateSensors);
+    response.status(200).send(stateSensors);
+});
+
 
 
 

@@ -52,35 +52,35 @@ paths:
 
     #POST json/body, note here NOT write '/buildings' again, because above already provided
     post:
-        summary: Add a new building
-        produces:
-          - application/json
-        consumes:
-          - application/json
-        parameters:
-        - in: body
-          name: building
-          required: true
-          schema: 
-            type: object
-            properties:
-              id:
-                type: integer
-              name:
-                type: string
-              address:
-                type: object
-                properties: 
-                  streetAdress:
-                    type: string
-                  PostNumber:
-                    type: number
+      summary: Add a new building
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+      - in: body
+        name: building
+        required: true
+        schema: 
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            address:
+              type: object
+              properties: 
+                streetAdress:
+                  type: string
+                PostNumber:
+                  type: number
 
-        responses:
-          201:
-            description: created
-          401:
-            description: authorization error
+      responses:
+        201:
+          description: created
+        401:
+          description: authorization error
 
 
 #/buildings/buildingID, dynamically meaning id is a parameter
@@ -170,20 +170,49 @@ paths:
               type: array
               items:
                 type: string
-                # properties:
-                #   id: 
-                #     type: string
-                #   name: 
-                #     type: string
-                #   value:
-                #     type: number
-                #   state:
-                #     type: string
                 
           401:
             description: authorization error
           400:
             description: hi, this is a bad request
+
+#
+  /sensors/{state}:
+    description: get all sensors with a specific state
+
+    #GET
+    get:
+      summary: Returns all sensors with a state
+      parameters:
+        - name: state
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Sucess Response
+          content: application/json
+          
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id: 
+                  type: integer
+                name: 
+                  type: string
+                value:
+                  type: number
+                  state:
+                      type: string
+                  
+        401:
+          description: authorization error
+        400:
+          description: hi, this is a bad request
+
           
         
           
