@@ -28,31 +28,31 @@ let buildings = [
 let sensors = [
     {
         id: "sensor1",
-        name: "sensorOne",
+        sensorName: "sensorOne",
         value: 2.6,
         state: "online"
     },
     {
         id: "sensor2",
-        name: "sensorTwo",
+        sensorName: "sensorTwo",
         value: 5.6,
         state: "error"
     },
     {
         id: "sensor3",
-        name: "sensorThree",
+        sensorName: "sensorThree",
         value: 8.6,
         state: "offline"
     },
     {
         id: "sensor4",
-        name: "sensorFour",
+        sensorName: "sensorFour",
         value: 9.6,
         state: "online"
     },
     {
         id: "sensor5",
-        name: "sensorFive",
+        sensorName: "sensorFive",
         value: 10.6,
         state: "error"
     },
@@ -118,6 +118,20 @@ app.get('/sensors/:state', (request, response) => {
     const stateSensors = sensors.filter(item => item.state === request.params.state);
     console.log("statesensors = ", stateSensors);
     response.status(200).send(stateSensors);
+});
+
+app.put('/sensors/:id', (request, response) => {
+    console.log("req.body = ", request.body);
+
+    function updateName(sensor){
+        if (sensor.id === request.params.id){
+            sensor.name = request.body.sensorName;
+            return true;
+        }
+        return false;
+    }
+    const updatedSensor = sensors.filter(updateName);
+    response.status(201).send(updatedSensor);
 });
 
 

@@ -193,7 +193,6 @@ paths:
         200:
           description: Sucess Response
           content: application/json
-          
           schema:
             type: array
             items:
@@ -213,7 +212,34 @@ paths:
         400:
           description: hi, this is a bad request
 
+    #PUT
+  /sensors/{sensorId}:
+    put:
+      summary: Update one sensor
+      produces:
+          - application/json
+      consumes:
+          - application/json
+      parameters:
+        - name: sensorId
+          in: path
+          required: true
+          type: string
+        - name: sensorName
+          in: body
+          schema:
+            type: object
+            properties: 
+              sensorName: 
+                type: string
+          required: true
+      responses:
+        204:
+          description: Sucess updated
           
+        401:
+          description: authorization error
+      
         
           
           
