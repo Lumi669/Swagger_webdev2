@@ -212,7 +212,7 @@ paths:
         400:
           description: hi, this is a bad request
 
-    #PUT
+#PUT
   /sensors/{sensorId}:
     put:
       summary: Update one sensor
@@ -240,7 +240,29 @@ paths:
         401:
           description: authorization error
       
+#Delete a sensor by id
+    delete:
+      summary: Delete one sensor
+      produces:
+          - application/json
+      consumes:
+          - application/json
+      parameters:
+        - name: sensorId
+          in: path
+          required: true
+          type: string
         
+      responses:
+        200:
+          description: Sucess deleted
+          
+        401:
+          description: authorization error
+      
+        
+          
+               
           
           
       

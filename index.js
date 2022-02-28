@@ -134,6 +134,14 @@ app.put('/sensors/:id', (request, response) => {
     response.status(201).send(updatedSensor);
 });
 
+app.delete('/sensors/:id', (request, response) => {
+    console.log("req.params = ", request.params);
+
+    
+    const sensorsAfterDel = sensors.filter(item => item.id !== request.params.id);
+    response.status(200).send(sensorsAfterDel);
+});
+
 
 
 
