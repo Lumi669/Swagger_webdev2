@@ -25,6 +25,52 @@ let buildings = [
     },
 ];
 
+let sensors = [
+    {
+        id: "sensor1",
+        name: "sensorOne",
+        value: 2.6,
+        state: "online"
+    },
+    {
+        id: "sensor2",
+        name: "sensorTwo",
+        value: 5.6,
+        state: "error"
+    },
+    {
+        id: "sensor3",
+        name: "sensorThree",
+        value: 8.6,
+        state: "offline"
+    },
+    {
+        id: "sensor4",
+        name: "sensorFour",
+        value: 9.6,
+        state: "online"
+    },
+    {
+        id: "sensor5",
+        name: "sensorFive",
+        value: 10.6,
+        state: "error"
+    },
+
+]
+
+let buildingSensors = [
+    {
+        id: 1, 
+        sensors: ["sensor1", "sensor4", "sensor5" ]
+    },
+    {
+        id: 29,
+        sensors: ["sensor2", "sensor3"]
+    }
+]
+
+
 
 app.get('/buildings', (request, response) => {
     response.status(200).send(buildings)
@@ -53,11 +99,19 @@ app.patch('/buildings/:id', (request, response) => {
         }
         return false;
     }
-
     updatedBuilding = buildings.filter(updateName);
-
     response.status(201).send(updatedBuilding);
 });
+
+app.get('/buildings/:id/sensors', (request, response) => {
+
+    const obj = buildingSensors.find(item => item.id === parseInt(request.params.id));
+    const sensors = obj.sensors;
+
+    console.log(sensors);
+    response.status(200).send(sensors);
+});
+
 
 
 

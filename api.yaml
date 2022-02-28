@@ -150,41 +150,43 @@ paths:
 
 
 #Sensor
-  /buldings/buildingID/sensors:
-      description: all sensors of a specific building
+
+  /buildings/{buildingId}/sensors:
+      description: get sensors of a building
+    
       get:
         summary: Returns all sensor of a building
         parameters:
-          - in: query
-            name: buildingID
+          - in: path
+            name: buildingId
             required: true
-            schema: 
-              type: integer
-              example: 3
+            type: integer
+          
         responses:
           200:
             description: Sucess Response
-            content: 
-              application/json:
-                schema:
-                  type: array
-                  items:
-                    properties:
-                      buildingId: 
-                        type: integer
-                        example: 3
-                      buildingName: 
-                        type: string
-                        example: ROSE
-                      buildingAddress:
-                        type: object
-                        properties:
-                          streetAdress: 
-                            type: string
-                          PostNumber:
-                            type: integer
+            content: application/json
+            schema:
+              type: array
+              items:
+                type: string
+                # properties:
+                #   id: 
+                #     type: string
+                #   name: 
+                #     type: string
+                #   value:
+                #     type: number
+                #   state:
+                #     type: string
+                
           401:
             description: authorization error
+          400:
+            description: hi, this is a bad request
+          
+        
+          
           
       
 
